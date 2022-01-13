@@ -1,12 +1,12 @@
 import { Component, useContext } from "solid-js";
-import { TaskContext } from "../models/TaskContext";
+import { TaskContext, useTasks } from "../models/TaskContext";
 
 const Form: Component = () => {
-  const [tasks, setTasks] = useContext(TaskContext)
+  const {tasks, mutate} = useTasks()
   let id = 1;
   let title;
   let date;
-  const addTask = (title, date) => setTasks([...tasks(), {id: ++id, title, date, status: false}])
+  const addTask = (title, date) => mutate([...tasks(), {id: ++id, title, date, status: false}])
   return (
     <div class="block">
       <div class="mt-6 sm:mt-5 space-y-6 sm:space-y-5">
