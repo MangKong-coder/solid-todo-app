@@ -1,6 +1,7 @@
-import { Component, createSignal, JSX } from 'solid-js';
+import { Component, createSignal, JSX, Show } from 'solid-js';
 
 import Button from './components/Button';
+import Form from './components/Form';
 import Tasks from './components/Tasks';
 import { TaskProvider } from './models/TaskContext';
 
@@ -12,6 +13,9 @@ const App: Component = (): JSX.Element => {
       <div className="container mx-auto p-2 border-slate-400 border rounded-md max-w-prose">
         <h1 class="text-center text-3xl font-bold">To Do App</h1>
         <Button isAdd={isAdd()} toggle={toggle} />
+        <Show when={isAdd()}>
+          <Form />
+        </Show>
         <Tasks />
       </div>
     </div>

@@ -3,7 +3,9 @@ import { TaskContext } from "../models/TaskContext";
 
 export function Tasks(): JSX.Element | JSX.Element[] {
   const [tasks, setTasks] = useContext(TaskContext)
-  const toggleStatus = () => setTasks(tasks().map(t => ({...t, status: !t.status})));
+  const toggleStatus = (id) => {setTasks(tasks().map((t) => (
+    t.id !== id ? t : { ...t, status: !t.status }
+  )));}
 
   return (
     <ul class="list-none list-inside my-7 text-xl">
@@ -11,7 +13,7 @@ export function Tasks(): JSX.Element | JSX.Element[] {
         {(task) =>
           <li >
             <span class="block space-x-2">
-              <input type="checkbox" checked={task.status} onChange={toggleStatus} />
+              <input type="checkbox" checked={task.status} onChange={[toggleStatus, task.id]} />
               <Show when={task.status} fallback={<label class="font-bold">{task.title}</label>}>
                 <label class="font-bold line-through">{task.title}</label>
               </Show>
